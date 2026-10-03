@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;600;800&display=swap');
+
+/* 🎨 Yummiii brand tokens: change a colour here and it updates everywhere */
+:root {
+  --green: #5CB946;
+  --green-dark: #04A351;
+  --yellow: #FDF107;
+  --red: #EB2023;
+  --white: #FFFFFF;
+  --text: #1F2937;
+  --bg: #F7FBF5;
+
+  --font-heading: 'Lilita One', cursive;
+  --font-body: 'Nunito', sans-serif;
+  --radius: 16px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--bg);
+}
+
+h1, h2, h3 { font-family: var(--font-heading); font-weight: 400; }
+
+.btn {
+  background: var(--green);
+  color: var(--white);
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  font-weight: 800;
+  cursor: pointer;
+}
+.btn:hover { background: var(--green-dark); }
+
+/* 🏠 Home page */
+.home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px;
+  text-align: center;
+}
+.home h1 { font-size: 2.5rem; color: var(--green); }
+.home-logo { border-radius: var(--radius); }
