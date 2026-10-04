@@ -10,11 +10,11 @@ function Navbar({ cartCount }) {
     <nav className="navbar">
       <img src={logo} alt="Yummiii logo" width="60" />
 
-      <a href="#" className="cart-link">🛒 ({cartCount})</a>
+      <a href="#" className="cart-link">🛒 <span className="cart-badge">{cartCount}</span></a>
 
       <button
         className="menu-btn"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen(prev => !prev)}
         aria-label="Toggle menu"
         aria-expanded={isOpen}
       >
