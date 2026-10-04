@@ -2,11 +2,18 @@ import logo from './assets/logo.jpg'
 import Navbar from './components/Navbar'
 import products from './data/products'
 import ProductCard from './components/ProductCard'
+import { useState } from 'react'
 
 function App() {
+  const [cartCount, setCartCount] = useState(0)
+
+  function addToCart() {
+    setCartCount((prevCount) => prevCount + 1)
+  }
+
   return (
     <div>
-      <Navbar cartCount={12}/>
+      <Navbar cartCount={cartCount} />
       <main>
         <section className="hero">
           <img src={logo} alt="Yummiii logo" width="200" className="hero-logo" />
@@ -22,7 +29,7 @@ function App() {
           <h2 className="section-title">Our Yummy Treats</h2>
           <div className="product-grid">
             {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product.id} product={product} onAddToCart={addToCart} />
             ))}
           </div>
         </section>
