@@ -38,7 +38,7 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 400; }
 
 /* 🏠 Home page */
 .home {
-  min-height: 100vh;
+  min-height: calc(100vh - 84px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,3 +49,53 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 400; }
 }
 .home h1 { font-size: 2.5rem; color: var(--green); }
 .home-logo { border-radius: var(--radius); }
+
+/* 🧭 Navbar */
+.navbar {
+  background: var(--green);
+  display: flex;
+  flex-wrap: wrap;              /* lets the open menu drop to a new line */
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+}
+
+.navbar a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 800;
+}
+.navbar a:hover { color: var(--yellow); }
+
+.cart-link { margin-left: auto; margin-right: 16px; }
+
+.menu-btn {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: none;                 /* hidden on phones */
+  width: 100%;                  /* full width under the bar */
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 12px;
+}
+.nav-links.open { display: flex; }   /* shown when the ☰ is tapped */
+
+/* 💻 Tablet and up */
+@media (min-width: 768px) {
+  .menu-btn { display: none; }         /* no hamburger on big screens */
+  .nav-links {
+    display: flex;
+    width: auto;
+    flex-direction: row;              /* links side by side */
+    gap: 24px;
+    padding-top: 0;
+    margin-left: auto;
+  }
+  .cart-link { order: 1; margin: 0 0 0 24px; }   /* cart moves to the far right */
+}
