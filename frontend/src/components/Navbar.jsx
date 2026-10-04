@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import logo from '../assets/logo.jpg'
 
+const categories = ['Home', 'Cakes', 'Fast Food', 'Sweets']
+
 function Navbar({ cartCount }) {
   const [isOpen, setIsOpen] = useState(false)   // menu starts closed
 
@@ -10,16 +12,19 @@ function Navbar({ cartCount }) {
 
       <a href="#" className="cart-link">🛒 ({cartCount})</a>
 
-      <button className="menu-btn" onClick={() => setIsOpen(!isOpen)} 
-      aria-label="Toggle menu" aria-expanded={isOpen}>
+      <button
+        className="menu-btn"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label="Toggle menu"
+        aria-expanded={isOpen}
+      >
         {isOpen ? '✕' : '☰'}
       </button>
 
       <div className={isOpen ? 'nav-links open' : 'nav-links'}>
-        <a href="#">Home</a>
-        <a href="#">Cakes</a>
-        <a href="#">Fast Food</a>
-        <a href="#">Sweets</a>
+        {categories.map((name) => (
+          <a href="#" key={name}>{name}</a>
+        ))}
       </div>
     </nav>
   )
