@@ -320,3 +320,60 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 400; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* 🛒 Cart */
+.cart {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.cart-item img { width: 64px; height: 64px; object-fit: cover; border-radius: 12px; }
+.cart-item-info h3 { font-size: 1rem; }
+
+.qty { display: flex; align-items: center; gap: 8px; }
+.qty button {
+  width: 32px; height: 32px;
+  border: none; border-radius: 50%;
+  background: var(--green); color: var(--white);
+  font-size: 1.1rem; font-weight: 800; cursor: pointer;
+}
+.qty button:hover { background: var(--green-dark); }
+
+.line-total { font-weight: 800; color: var(--green-dark); }
+.remove { background: none; border: none; font-size: 1.2rem; cursor: pointer; }
+
+/* 📱 phone: qty, total and remove wrap onto a second row */
+.cart-item .qty { grid-column: 2; }
+.cart-item .line-total { grid-column: 3; grid-row: 1; }
+.cart-item .remove { grid-column: 3; grid-row: 2; justify-self: end; }
+
+.cart-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+  font-size: 1.2rem;
+}
+
+/* 💻 Tablet and up: everything on one row */
+@media (min-width: 768px) {
+  .cart-item { grid-template-columns: 64px 1fr auto auto auto; }
+  .cart-item .qty,
+  .cart-item .line-total,
+  .cart-item .remove { grid-column: auto; grid-row: auto; }
+}

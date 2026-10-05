@@ -22,10 +22,35 @@ function CartProvider({ children }) {
     })
   }
 
+  function removeFromCart(id) {
+    setItems((prev) => prev.filter((item) => item.id !== id))
+  }
+
+  function increaseQty(id) {
+    setItems((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    )
+  }
+
+  function decreaseQty(id) {
+    setItems((prev) =>
+      prev
+        .map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+        )
+        .filter((item) => item.quantity > 0)   // quantity 0 → remove from cart
+    )
+  }
+
   const cartCount = items.reduce((total, item) => total + item.quantity, 0)
+  const cartTotal = items.reduce((total, item) => total + item.price * item.quantity, 0)
 
   return (
-    <CartContext.Provider value={{ items, addToCart, cartCount }}>
+    <CartContext.Provider
+      value={{ items, addToCart, removeFromCart, increaseQty, decreaseQty, cartCount, cartTotal }}
+    >
       {children}
     </CartContext.Provider>
   )
