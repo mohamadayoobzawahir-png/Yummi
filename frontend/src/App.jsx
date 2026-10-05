@@ -1,8 +1,10 @@
-import logo from './assets/logo.jpg'
 import Navbar from './components/Navbar'
-import products from './data/products'
-import ProductCard from './components/ProductCard'
 import { useState } from 'react'
+import { Routes, Route } from 'react-router'
+import Home from './pages/Home'
+import Shop from './pages/Shop'
+import Cart from './pages/Cart'
+import NotFound from './pages/NotFound'
 
 function App() {
   const [cartCount, setCartCount] = useState(0)
@@ -15,24 +17,12 @@ function App() {
     <div>
       <Navbar cartCount={cartCount} />
       <main>
-        <section className="hero">
-          <img src={logo} alt="Yummiii logo" width="200" className="hero-logo" />
-          <h1>Welcome to Yummiii!</h1>
-          <p>Cakes, fast food and sweets, delivered to your door.</p>
-          <div className="dots">
-            <span></span><span></span><span></span>
-          </div>
-          <button className="btn btn-cta">Shop Now</button>
-        </section>
-
-        <section className="products">
-          <h2 className="section-title">Our Yummy Treats</h2>
-          <div className="product-grid">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} onAddToCart={addToCart} />
-            ))}
-          </div>
-        </section>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<Shop onAddToCart={addToCart} />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </main>
     </div>
   )
