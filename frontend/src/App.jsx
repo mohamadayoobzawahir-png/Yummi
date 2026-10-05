@@ -20,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop onAddToCart={addToCart} />} />
+          <Route path="/shop/:category" element={<Shop onAddToCart={addToCart} />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
