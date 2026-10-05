@@ -1,4 +1,8 @@
-function ProductCard({ product, onAddToCart }) {
+import { useCart } from '../context/useCart'
+
+function ProductCard({ product }) {
+  const { addToCart } = useCart()
+
   return (
     <div className="product-card">
       <div className="product-img">
@@ -9,7 +13,7 @@ function ProductCard({ product, onAddToCart }) {
         <h3>{product.name}</h3>
         <p className="price">Rs. {product.price.toLocaleString()}</p>
         {product.inStock ? (
-          <button className="btn btn-add" onClick={onAddToCart}>
+          <button className="btn btn-add" onClick={() => addToCart(product)}>
             Add to Cart
           </button>
         ) : (

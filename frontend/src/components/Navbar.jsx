@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import logo from '../assets/logo.jpg'
 import { Link } from 'react-router'
+import { useCart } from '../context/useCart'
 
 const categories = [
   { label: 'Home', to: '/' },
@@ -10,8 +11,10 @@ const categories = [
   { label: 'Sweets', to: '/shop/sweets' },
 ]
 
-function Navbar({ cartCount }) {
+function Navbar() {
   const [isOpen, setIsOpen] = useState(false)   // menu starts closed
+
+  const { cartCount } = useCart()
 
   return (
     <nav className="navbar">

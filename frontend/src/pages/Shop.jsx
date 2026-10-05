@@ -15,7 +15,7 @@ function toTitle(slug) {
     .join(' ')
 }
 
-function Shop({ onAddToCart }) {
+function Shop() {
   const { category } = useParams()
 
   const visibleProducts = category
@@ -32,7 +32,7 @@ function Shop({ onAddToCart }) {
 
       <div className="product-grid">
         {visibleProducts.map((product) => (
-          <ProductCard key={product.id} product={product} onAddToCart={onAddToCart} />
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </section>
