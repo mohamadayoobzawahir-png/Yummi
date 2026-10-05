@@ -1,7 +1,14 @@
 import { useState } from 'react'
 import logo from '../assets/logo.jpg'
+import { Link } from 'react-router'
 
-const categories = ['Home', 'Cakes', 'Fast Food', 'Sweets']
+const categories = [
+  { label: 'Home', to: '/' },
+  { label: 'Shop', to: '/shop' },
+  { label: 'Cakes', to: '/shop/cakes' },
+  { label: 'Fast Food', to: '/shop/fast-food' },
+  { label: 'Sweets', to: '/shop/sweets' },
+]
 
 function Navbar({ cartCount }) {
   const [isOpen, setIsOpen] = useState(false)   // menu starts closed
@@ -10,7 +17,9 @@ function Navbar({ cartCount }) {
     <nav className="navbar">
       <img src={logo} alt="Yummiii logo" width="60" />
 
-      <a href="#" className="cart-link">🛒 <span className="cart-badge">{cartCount}</span></a>
+      <Link to="/cart" className="cart-link">
+        🛒 <span className="cart-badge">{cartCount}</span>
+      </Link>
 
       <button
         className="menu-btn"
@@ -22,8 +31,10 @@ function Navbar({ cartCount }) {
       </button>
 
       <div className={isOpen ? 'nav-links open' : 'nav-links'}>
-        {categories.map((name) => (
-          <a href="#" key={name}>{name}</a>
+        {categories.map((category) => (
+          <Link to={category.to} key={category.to} onClick={() => setIsOpen(false)}>
+            {category.label}
+          </Link>
         ))}
       </div>
     </nav>
