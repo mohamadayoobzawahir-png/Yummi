@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { useCart } from '../context/useCart'
 import deliveryAreas from '../data/deliveryAreas'
 
@@ -16,7 +16,8 @@ function validate(form) {
 }
 
 function Checkout() {
-  const { items, cartTotal } = useCart()
+  const { items, cartTotal, clearCart } = useCart()
+  const navigate = useNavigate()
   const [form, setForm] = useState(emptyForm)
   const [errors, setErrors] = useState({})
 
@@ -37,9 +38,19 @@ function Checkout() {
     setErrors(newErrors)
     if (Object.keys(newErrors).length > 0) return    // has errors → stop here
 
-    // Part B: send to Laravel and show a confirmation page
-    console.log('Order placed:', { ...form, items, deliveryFee, total, payment: 'cod' })
-    alert('Order placed! 🎉 (check the console)')
+    // Later: send the order to Laravel instead of building it here
+    const order = {
+      number: 'YUM-' + Date.now().toString().slice(-6),   // temporary; Laravel will give real numbers
+      customer: form,
+      items,
+      subtotal: cartTotal,
+      deliveryFee,
+      total,
+      payment: 'Cash on Delivery',
+    }
+
+    clearCart()
+    navigate('/order-success', { state: { order } })   // go to the success page, carrying the order
   }
 
   if (items.length === 0) {
