@@ -1,8 +1,21 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { CartContext } from './CartContext'
 
 function CartProvider({ children }) {
-  const [items, setItems] = useState([])   // e.g. [{ id: 1, name: 'Cake', price: 2500, quantity: 2 }]
+  // LOAD: read the saved cart once, when the app starts
+  const [items, setItems] = useState(() => {
+    try {
+      const saved = localStorage.getItem('yummiii-cart')
+      return saved ? JSON.parse(saved) : []
+    } catch {
+      return []    // saved data is broken → start with an empty cart
+    }
+  })
+
+  // SAVE: write the cart to storage every time items change
+  useEffect(() => {
+    localStorage.setItem('yummiii-cart', JSON.stringify(items))
+  }, [items])
 
   function addToCart(product) {
     setItems((prev) => {
